@@ -1,0 +1,380 @@
+{
+  "name": "mental-health",
+  "datapackage_version": "1.0-beta.18",
+  "title": "Mental Health",
+  "description": "Mental Health reports the prevalence of the mental illness in the past year by age range.",
+  "version": "1.0",
+  "licenses": [{
+    "url": "http://opendatacommons.org/licenses/pddl/",
+    "name": "Open Data Commons Public Domain",
+    "version": "1.0",
+    "id": "odc-pddl"
+  }],
+  "sources": [{
+    "name": "samhsa",
+    "web": ""
+  }],
+  "author":[{
+    "name": "Jenna Daly",
+    "email": "jdaly@ctdata.org",
+    "web": "http://ctdata.org"
+  }],
+  "contributor": [],
+  "resources": [{
+    "path": "data/dmhas_nsduh_mh_2015.csv",
+    "format": "csv",
+    "schema": {
+      "fields": [{
+          "name": "Region",
+          "type": "string",
+          "dimension": false
+        }, {
+          "name": "FIPS",
+          "type": "string",
+          "dimension": false
+        }, {
+          "name": "Year",
+          "type": "string",
+          "dimension": false
+        }, {
+          "name": "Age Range",
+          "type": "string",
+          "dimension": true, 
+          "constraints": {
+            "enum": [
+              "12-17", 
+              "18-25", 
+              "Over 17", 
+              "Over 25"
+            ]
+          }     
+        }, {      
+          "name": "Mental Health",
+          "type": "string",
+          "dimension": true, 
+          "constraints": {
+            "enum": [
+              "Had at Least One Major Depressive Episode in the Past Year",
+              "Any Mental Illness in the Past Year",
+              "Serious Mental Illness in the Past Year",
+              "Had Serious Thoughts of Suicide in the Past Year"
+            ]
+          }     
+        }, {           
+          "name": "Measure Type",
+          "type": "string",
+          "dimension": true, 
+          "constraints": {
+            "enum": ["Percent"]
+          }     
+        }, {
+          "name": "Variable",
+          "type": "string",
+          "dimension": true, 
+          "constraints": {
+            "enum": ["Mental Health"]
+          }     
+        }, {   
+          "name": "Value",
+          "type": "number",
+          "dimension": false
+        }]
+      }
+    }
+  ],
+  "last_modified": "10/18/2017",
+  "ckan_extras": {
+    "full_description": {
+      "ckan_name": "Full Description",
+      "value": " <p> Mental Health reports an estimated average percent of people who have experienced some form of mental illness in the past year, including Major Depressive Episodes and Serious Thoughts of Suicide. </p> <p> According to the Diagnostic and Statistical Manual of Mental Disorders (DSM-IV), a person is defined as having had a Major Depressive Episode if he or she has had at least five or more of the following symptoms nearly every day in the same 2-week period, where at least one of the symptoms is a depressed mood or loss of interest or pleasure in daily activities </p> <ol> <li>Depressed mood most of the day</li> <li>Markedly diminished interest or pleasure in all or almost all activities most of the day</li> <li>Significant weight loss when not sick or dieting, or weight gain when not pregnant or growing, or decrease or increase in appetite</li> <li>Insomnia or hypersomnia</li> <li>Psychomotor agitation or retardation</li> <li>Fatigue or loss of energy</li> <li>Feelings of worthlessness</li> <li>Diminished ability to think or concentrate or indecisiveness</li> <li>Recurrent thoughts of death or suicidal ideation.</li> </ol> <p> Questions regarding Mental Illness and Suicide were only asked to adults 18 years and older. Any mental illness among adults is defined as adults aged 18 or older who currently or at any time in the past year have had a diagnosable mental, behavioral, or emotional disorder of sufficient duration to meet diagnostic criteria specified within the DSM-IV, regardless of the level of impairment in carrying out major life activities. In contrast, Serious Mental Illness is differentiated as causing a substantial impairment. The impact of this impairment is measured in a separate clinical assessment called the Global Assessment of Functioning (GAF). Serious Thoughts of Suicide include thinking about, making plans or attempting suicide, or receiving medical attention or staying overnight at a hospital because of such an attempt. </p> <p> This data is collected by the Substance Abuse and Mental Health Services Administration (SAMHSA) as part of the National Survey on Drug Use and Health (NSDUH), formerly known as the National Household Survey on Drug Abuse (NHSDA). This survey is conducted on a representative sample of U.S. civilian, non-institutionalized people ages 12 and older. </p> <p> The Northeast region includes the following states: Connecticut, Maine, Massachusetts, New Hampshire, New Jersey, New York, Pennsylvania, Rhode Island, and Vermont. The Midwest region includes the following states: Illinois, Indiana, Iowa, Kansas, Michigan, Minnesota, Missouri, Nebraska, North Dakota, Ohio, South Dakota, and Wisconsin. The South region includes the following states: Alabama, Arkansas, Delaware, District of Columbia, Florida, Georgia, Kentucky, Louisiana, Maryland, Mississippi, North Carolina, Oklahoma, South Carolina, Tennessee, Texas, Virginia, and West Virginia. The West region includes the following states: Alaska, Arizona, California, Colorado, Hawaii, Idaho, Montana, Nevada, New Mexico, Oregon, Utah, Washington, and Wyoming.</p>",
+      "type": "string"
+    },
+    "suppression": {
+      "ckan_name": "Suppression",
+      "value": "Data where the precision of calculated estimated averages was too low are suppressed.",
+      "type": "string"
+    },
+    "technical_notes": {
+      "ckan_name": "Technical Notes",
+      "value": "",
+      "type": "string"
+    },
+    "socrata": {
+      "ckan_name": "Socrata",
+      "value": "False",
+      "type": "string"
+    },
+    "socrata_url": {
+      "ckan_name": "Socrata Dataset URL",
+      "value": "",
+      "type": "string"
+    },
+    "socrata_dataset_name": {
+      "ckan_name": "Socrata Dataset Name",
+      "value": "",
+      "type": "string"
+    }, 
+    "domain": {
+      "ckan_name": "Domain",
+      "value": "Health",
+      "type": "string"
+    },
+    "subdomain": {
+      "ckan_name": "Subdomain",
+      "value": "Mental Health",
+      "type": "string"
+    },
+    "geography": {
+      "ckan_name": "Geography",
+      "value": "Region",
+      "type": "string",
+      "constraints": {"enum": ["Town", "County", "Town/County", "District", "Other"]}
+    },
+    "frequency": {
+      "ckan_name": "Frequency",
+      "value": "Annual",
+      "type": "string"
+    },
+    "years_in_catalog": {
+      "ckan_name": "Years in Catalog",
+      "value": ["2009-2010", "2010-2011", "2011-2012", "2012-2013", "2013-2014", "2014-2015"],
+      "type": "array"
+    },
+    "latest_year": {
+      "ckan_name": "Latest Year Available",
+      "value": "2014-2015",
+      "type": "string"
+    },
+    "disabled_views": {
+      "ckan_name": "Disabled Views",
+      "value": ["map"],
+      "type": "array",
+      "constraints": {"enum": ["map", "table", "bar", "line"]}
+    },
+    "units": {
+      "ckan_name": "Units",
+      "value": {
+        "Number": "",
+        "Percent": "%"
+      }
+    },
+    "expected_number_of_geographies": {
+      "ckan_name": "Expected Number of Unique Geographies",
+      "value": 6,
+      "type": "string"
+    },
+    "default": {
+      "ckan_name": "Default",
+      "value": {
+        "Measure Type": "Percent",
+        "Region": "Connecticut",
+        "Year": ["2014-2015"],
+        "Variable": "Mental Health"
+      },
+      "type": "object"
+    }
+  },
+  "spot_checks": [
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "Connecticut",
+        "Year": "2009-2010",
+        "Mental Health": "Any Mental Illness in the Past Year",
+        "Age Range": "12-17",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": -6666
+      }
+    }, 
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "Midwestern Region",
+        "Year": "2010-2011",
+        "Mental Health": "Had at Least One Major Depressive Episode in the Past Year",
+        "Age Range": "18-25",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": 8.65
+      }
+    },
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "Northeastern Region",
+        "Year": "2011-2012",
+        "Mental Health": "Had Serious Thoughts of Suicide in the Past Year",
+        "Age Range": "Over 17",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": 3.77
+      }
+    },
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "Southern Region",
+        "Year": "2012-2013",
+        "Mental Health": "Serious Mental Illness in the Past Year",
+        "Age Range": "Over 25",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": 4.26
+      }
+    },
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "United States",
+        "Year": "2013-2014",
+        "Mental Health": "Had at Least One Major Depressive Episode in the Past Year",
+        "Age Range": "Over 17",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": 6.63
+      }
+    },
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "Western Region",
+        "Year": "2014-2015",
+        "Mental Health": "Had Serious Thoughts of Suicide in the Past Year",
+        "Age Range": "12-17",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": -6666
+      }
+    },
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "Northeastern Region",
+        "Year": "2009-2010",
+        "Mental Health": "Had Serious Thoughts of Suicide in the Past Year",
+        "Age Range": "Over 17",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": 3.82
+      }
+    },
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "Midwestern Region",
+        "Year": "2009-2010",
+        "Mental Health": "Any Mental Illness in the Past Year",
+        "Age Range": "Over 17",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": 18.59
+      }
+    },
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "Southern Region",
+        "Year": "2009-2010",
+        "Mental Health": "Had at Least One Major Depressive Episode in the Past Year",
+        "Age Range": "Over 17",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": 6.59
+      }
+    },
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "United States",
+        "Year": "2009-2010",
+        "Mental Health": "Serious Mental Illness in the Past Year",
+        "Age Range": "Over 17",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": 3.88
+      }
+    },
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "Connecticut",
+        "Year": "2010-2011",
+        "Mental Health": "Any Mental Illness in the Past Year",
+        "Age Range": "Over 25",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": 16.36
+      }
+    },
+    {
+      "type": "$lookup",
+      "filter": {
+        "Region": "Western Region",
+        "Year": "2011-2012",
+        "Mental Health": "Serious Mental Illness in the Past Year",
+        "Age Range": "12-17",
+        "Measure Type": "Percent"
+      },
+      "expected": {
+        "type": "$match",
+        "number type": "float",
+        "value": -6666
+      }
+    }    
+  ],
+  "dimension_groups": [
+    {
+      "Age Range": [
+        "12-17", 
+        "18-25", 
+        "Over 17", 
+        "Over 25"
+      ], 
+      "Mental Health": [
+        "Had at Least One Major Depressive Episode in the Past Year",
+        "Any Mental Illness in the Past Year",
+        "Serious Mental Illness in the Past Year",
+        "Had Serious Thoughts of Suicide in the Past Year"
+      ]
+    }
+  ]
+}
+
+
+
+
+
