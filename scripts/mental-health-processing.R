@@ -105,12 +105,6 @@ names(x1011_pct_tables) <- gsub("18-25 Estimate", "18-25", names(x1011_pct_table
 names(x1011_pct_tables) <- gsub("12-17 Estimate", "12-17", names(x1011_pct_tables))
 x1011_pct_tables[] <- lapply(x1011_pct_tables, gsub, pattern='%', replacement='')
 
-# x1011_pct_tables <- x1011_pct_tables %>% 
-#   mutate(`18+ Estimate MOE` = as.numeric(`18+ Estimate`) - as.numeric(`18+ 95% CI (Lower)`), 
-#          `18-25 Estimate MOE` = as.numeric(`18-25 Estimate`) - as.numeric(`18-25 95% CI (Lower)`), 
-#          `26+ Estimate MOE` = as.numeric(`26+ Estimate`) - as.numeric(`26+ 95% CI (Lower)`), 
-#          `12-17 Estimate MOE` = as.numeric(`12-17 Estimate`) - as.numeric(`12-17 95% CI (Lower)`))
-
 x1011_pct_tables$`12+` <- NA
 
 #Only keep certain columns
@@ -137,12 +131,6 @@ for (i in 1:length(x0910_pct_dfs)) {
   selected_geogs <- c("Total U.S.", "Northeast", "Midwest", "South", "West", "Connecticut" )
   file1 <- file1[file1$State %in% selected_geogs,]
   names(file1)[2] <- "18+"
-  # file1$`18+ Estimate (Lower)` <- lapply(strsplit(as.character(file1$`2009-2010(95% Confidence Interval)`), "\\-"), "[", 1)
-  # file1[] <- lapply(file1, gsub, pattern='[()]', replacement='')
-  # file1$`18+ Estimate (Lower)` <- substr((file1$`18+ Estimate (Lower)`), 1, 4)
-  # file1$`18+ Estimate (Lower)` <- as.numeric(file1$`18+ Estimate (Lower)` )
-  # file1 <- file1 %>% 
-  #   mutate(`18+ Estimate MOE` = as.numeric(`18+ Estimate`) - as.numeric(`18+ Estimate (Lower)`))
   file1 <- file1 %>% select(1,2,4,5,6)
   x0910_pct_tables <- rbind(x0910_pct_tables, file1)
 }
@@ -153,57 +141,6 @@ x0910_pct_tables$`26+` <- NA
 x0910_pct_tables$`12-17` <- NA
 
 x0911_pct_tables <- rbind(x0910_pct_tables, x1011_pct_tables)
-###############################################################################################################################
-
-# #grab all tables for numbers
-# dfs <- ls()[sapply(mget(ls(), .GlobalEnv), is.data.frame)]
-# x0911_num_dfs <- grep("Estimated", dfs, value=T)
-# 
-# #bind these together
-# x0911_num_tables <- data.frame(stringsAsFactors = FALSE)
-# for (i in 1:length(x0911_num_dfs)) {
-#   file1 <- get(x0911_num_dfs[i])
-#   file1 <- file1[-1,]
-#   selected_geogs <- c("Total U.S.", "National", "Northeast", "Midwest", "South", "West", "Connecticut" )
-#   file1 <- file1[file1$State %in% selected_geogs,]
-#   names(file1) <- gsub("[()]", " ", names(file1))
-#   names(file1) <- gsub("+ ", "", names(file1))
-# 
-#   file1$`18+ Estimate (Lower)` <- sapply(strsplit(as.character(file1$`18+95%ConfidenceInterval`), "\\-"), "[", 1)
-#   file1$`18-25 Estimate (Lower)` <- lapply(strsplit(as.character(file1$`18-2595%ConfidenceInterval`), "\\-"), "[", 1)
-#   file1$`26+ Estimate (Lower)` <- lapply(strsplit(as.character(file1$`26+95%ConfidenceInterval`), "\\-"), "[", 1)
-#   
-#   # file1$`18+ Estimate (Upper)` <- sapply(strsplit(as.character(file1$`18+(95% ConfidenceInterval)`), "\\-"), "[", 2)
-#   # file1$`18-25 Estimate (Upper)` <- lapply(strsplit(as.character(file1$`18-25 (95% ConfidenceInterval)`), "\\-"), "[", 2)
-#   # file1$`26+ Estimate (Upper)` <- lapply(strsplit(as.character(file1$`26+(95% ConfidenceInterval)`), "\\-"), "[", 2)
-# 
-#   file1$`18+ Estimate (Lower)` <- substr(file1$`18+ Estimate (Lower)`, 1, nchar(file1$`18+ Estimate (Lower)`)-1)
-#   file1$`18-25 Estimate (Lower)` <- substr(file1$`18-25 Estimate (Lower)`, 1, nchar(file1$`18-25 Estimate (Lower)`)-1)
-#   file1$`26+ Estimate (Lower)` <- substr(file1$`26+ Estimate (Lower)`, 1, nchar(file1$`26+ Estimate (Lower)`)-1)
-#   # 
-#   # file1$`18+ Estimate (Upper)` <- sub('.', '', file1$`18+ Estimate (Upper)`)
-#   # file1$`18-25 Estimate (Upper)` <- sub('.', '', file1$`18-25 Estimate (Upper)`)
-#   # file1$`26+ Estimate (Upper)` <- sub('.', '', file1$`26+ Estimate (Upper)`)
-# 
-#   file1[] <- lapply(file1, gsub, pattern='[()]', replacement='')
-#   file1[] <- lapply(file1, gsub, pattern=',', replacement='')
-# 
-#   file1$`18+ Estimate (Lower)` <- as.numeric(file1$`18+ Estimate (Lower)` )
-#   file1$`18-25 Estimate (Lower)` <- as.numeric(file1$`18-25 Estimate (Lower)` )
-#   file1$`26+ Estimate (Lower)` <- as.numeric(file1$`26+ Estimate (Lower)` )
-#   
-#   # file1$`18+ Estimate (Upper)` <- as.numeric(file1$`18+ Estimate (Upper)` )
-#   # file1$`18-25 Estimate (Upper)` <- as.numeric(file1$`18-25 Estimate (Upper)` )
-#   # file1$`26+ Estimate (Upper)` <- as.numeric(file1$`26+ Estimate (Upper)` )  
-#   
-#   file1 <- file1 %>% 
-#     mutate(`18+ Estimate Lower MOE` = as.numeric(`18+Estimate`) - as.numeric(`18+ Estimate (Lower)`),
-#            `18-25 Estimate Lower MOE` = as.numeric(`18-25Estimate`) - as.numeric(`18-25 Estimate (Lower)`),
-#            `26+ Estimate Lower MOE` = as.numeric(`26+Estimate`) - as.numeric(`26+ Estimate (Lower)`))
-#   
-#   file1 <- file1 %>% select(1,2,4,6,8,9,10,14:16)
-#   x0911_num_tables <- rbind(x0911_num_tables, file1)
-# }
 
 ###############################################################################################################################
 #2011-2012, 2012-2013, 2013-2014, 2014-2015 method (search table based on region, all tables have variables)
@@ -305,7 +242,6 @@ mh_data_long$`Age Range`[mh_data_long$`Age Range` == "26+"] <- "Over 25"
 
 #Set -- to NA
 mh_data_long$Value[mh_data_long$Value == "--"] <- NA
-
 
 #Rename State column
 names(mh_data_long)[names(mh_data_long) == "State"] <- "Region"
