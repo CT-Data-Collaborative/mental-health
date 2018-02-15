@@ -143,8 +143,8 @@ x0910_pct_tables$`12-17` <- NA
 x0911_pct_tables <- rbind(x0910_pct_tables, x1011_pct_tables)
 
 ###############################################################################################################################
-#2011-2012, 2012-2013, 2013-2014, 2014-2015 method (search table based on region, all tables have variables)
-urls2 <- c('NSDUH_2011-2012.html', 'NSDUH_2012-2013.html', 'NSDUH_2013-2014.html', 'NSDUH_2014-2015.html')
+#2011-2012, 2012-2013, 2013-2014, 2014-2015, 2015-2016 method (search table based on region, all tables have variables)
+urls2 <- c('NSDUH_2011-2012.html', 'NSDUH_2012-2013.html', 'NSDUH_2013-2014.html', 'NSDUH_2014-2015.html', 'NSDUH_2015-2016.html')
 
 # us and regions 2:11 
 # ct 24:25
@@ -185,21 +185,21 @@ for (j in 1:length(urls2)) {
 
 #Select pct tables, clean and join all years
 dfs <- ls()[sapply(mget(ls(), .GlobalEnv), is.data.frame)]
-x1115_pct_dfs <- grep("Percentages", dfs, value=T)
-x1115_pct_dfs <- x1115_pct_dfs[!grepl("2009-2010", x1115_pct_dfs)]
+x1116_pct_dfs <- grep("Percentages", dfs, value=T)
+x1116_pct_dfs <- x1116_pct_dfs[!grepl("2009-2010", x1116_pct_dfs)]
 
 #bind these together
-x1115_pct_tables <- data.frame(stringsAsFactors = FALSE)
-for (i in 1:length(x1115_pct_dfs)) {
-  file1 <- get(x1115_pct_dfs[i])
+x1116_pct_tables <- data.frame(stringsAsFactors = FALSE)
+for (i in 1:length(x1116_pct_dfs)) {
+  file1 <- get(x1116_pct_dfs[i])
   selected_geogs <- c("Depressive", "Illness", "Suicide")
   file1 <- file1[grep(paste(selected_geogs, collapse="|"), file1[,1]),]
   names(file1)[1] <- "Variable"
   file1 <- file1[!grepl("--", file1$Variable),]
-  x1115_pct_tables <- rbind(x1115_pct_tables, file1)
+  x1116_pct_tables <- rbind(x1116_pct_tables, file1)
 }
 
-all_years_pct_tables <- rbind(x0911_pct_tables, x1115_pct_tables)
+all_years_pct_tables <- rbind(x0911_pct_tables, x1116_pct_tables)
 
 ########################################################################################################
 
@@ -236,7 +236,7 @@ mh_data_long <- melt(
 
 #Relabel Age Range column
 mh_data_long$`Age Range` <- as.character(mh_data_long$`Age Range`)
-mh_data_long <- mh_data_long[mh_data_long$`Age Range` != "12+",]
+mh_data_long <- mh_data_long[mh_data_long$`Age Range` != "12+",] #All data is NA
 mh_data_long$`Age Range`[mh_data_long$`Age Range` == "18+"] <- "Over 17"
 mh_data_long$`Age Range`[mh_data_long$`Age Range` == "26+"] <- "Over 25"
 
@@ -263,9 +263,9 @@ mh_data_long <- mh_data_long %>%
 # Write to File
 write.table(
   mh_data_long,
-  file.path(getwd(), "data", "dmhas_nsduh_mh_2015.csv"),
+  file.path(getwd(), "data", "dmhas_nsduh_mh_2016.csv"),
   sep = ",",
   row.names = F,
-  na = "-6666"
+  na = "-6666" #Missing, denoted from '--' in raw data
 )
  
