@@ -21,7 +21,7 @@ path_to_raw <- (paste0(getwd(), "/", raw_location))
 all_html <- dir(path_to_raw, recursive=T, pattern = ".html") 
 
 #2009-2010 and 2010-2011 method (search tables based on variable name, each table has all regions)
-urls1 <- c('NSDUH_2009-2010_num.html', 'NSDUH_2009-2010_pct.html', 'NSDUH_2010-2011_num.html')
+urls1 <- c('raw/NSDUH_2009-2010_num.html', 'raw/NSDUH_2009-2010_pct.html', 'raw/NSDUH_2010-2011_num.html')
 
 for (j in 1:length(urls1)) {
   url <- urls1[j]
@@ -144,7 +144,7 @@ x0911_pct_tables <- rbind(x0910_pct_tables, x1011_pct_tables)
 
 ###############################################################################################################################
 #2011-2012, 2012-2013, 2013-2014, 2014-2015, 2015-2016 method (search table based on region, all tables have variables)
-urls2 <- c('NSDUH_2011-2012.html', 'NSDUH_2012-2013.html', 'NSDUH_2013-2014.html', 'NSDUH_2014-2015.html', 'NSDUH_2015-2016.html')
+urls2 <- c('raw/NSDUH_2011-2012.html', 'raw/NSDUH_2012-2013.html', 'raw/NSDUH_2013-2014.html', 'raw/NSDUH_2014-2015.html', 'raw/NSDUH_2015-2016.html', 'raw/NSDUH_2016-2017.html')
 
 # us and regions 2:11 
 # ct 24:25
@@ -263,9 +263,8 @@ mh_data_long <- mh_data_long %>%
 # Write to File
 write.table(
   mh_data_long,
-  file.path(getwd(), "data", "dmhas_nsduh_mh_2016.csv"),
+  file.path(getwd(), "data", "dmhas_nsduh_mh_2017.csv"),
   sep = ",",
   row.names = F,
   na = "-6666" #Missing, denoted from '--' in raw data
 )
- 
