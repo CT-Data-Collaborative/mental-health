@@ -20,3 +20,4 @@ Mental Health reports the prevalence of the mental illness in the past year by a
 #### 2017-2018
 
 1. Data is processed by Jupyter notebook, because it is published in .xls
+1. Put the .xls spreadsheet in `raw/` and update Jupyter notebook accordingly
